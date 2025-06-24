@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Idea Board</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>💡 Skillmate Idea Board</h1>
+    <p>Welcome! Share your ideas and inspire others.</p>
+
+    <div class="idea-box">
+        <input type="text" placeholder="Write your idea here..." id="ideaInput">
+        <button onclick="postIdea()">Post Idea</button>
+    </div>
+
+    <ul id="ideaList"></ul>
+
+    <script>
+        function postIdea() {
+            const input = document.getElementById("ideaInput");
+            const idea = input.value.trim();
+            if (idea !== "") {
+                const list = document.getElementById("ideaList");
+                const item = document.createElement("li");
+                item.textContent = idea;
+                list.appendChild(item);
+                input.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
