@@ -1,0 +1,241 @@
+:root {
+  --bg-color: #eef2f3;
+  --text-color: #2c3e50;
+  --card-bg: white;
+  --button-bg: #3498db;
+  --button-hover: #134260;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #f0f0f0;
+  --card-bg: #1e1e1e;
+  --button-bg: #607d8b;
+  --button-hover: #455a64;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+body.dark-mode .container {
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  color: var(--text-color);
+}
+
+.toggle-btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--button-bg);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.toggle-btn:hover {
+  background-color: var(--button-hover);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+input {
+  padding: 0.75rem;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: border 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+input:focus {
+  border-color: var(--button-bg);
+  outline: none;
+}
+
+button[type="submit"] {
+  padding: 0.75rem;
+  background-color: var(--button-bg);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--button-hover);
+}
+
+#loading {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #888;
+}
+
+/* Toast Notifications */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: #323232;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: fadeInOut 3s ease-in-out;
+  z-index: 1000;
+}
+
+.toast.error {
+  background-color: #c0392b;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(20px); }
+}
+
+/* ✅ Message Display Section */
+.message-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12px 16px;
+  border-bottom: 1px dashed #ccc;
+  background: var(--card-bg);
+  transition: background 0.4s ease, border-color 0.4s ease;
+  text-align: left;
+}
+
+body.dark-mode .message-row {
+  border-bottom: 1px dashed #555;
+}
+
+.message-row:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.message-content {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.message-name {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.message-text {
+  color: var(--text-color);
+  flex: 1;
+  word-break: break-word;
+}
+
+.reactions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-left: 12px;
+}
+
+.reactions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--text-color);
+  transition: color 0.4s ease, transform 0.1s ease;
+}
+
+.reactions button span {
+  margin-left: 4px;
+  color: var(--text-color); /* ✅ Ensures emoji count is visible in dark mode */
+}
+
+.reactions button:hover {
+  transform: scale(1.1);
+}
+.theme-switch {
+  width: 60px;
+  height: 32px;
+  border-radius: 32px;
+  border: none;
+  background: #ccc;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  padding: 0;
+}
+
+.theme-switch .slider {
+  width: 28px;
+  height: 28px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .theme-switch {
+  background: #555;
+}
+
+body.dark-mode .theme-switch .slider {
+  transform: translateX(28px);
+}
+
+body.dark-mode .theme-switch .slider .icon {
+  content: "🌙";
+}
