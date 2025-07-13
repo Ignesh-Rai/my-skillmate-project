@@ -1,16 +1,25 @@
 # my-skillmate-project
-A mini project to improve my web development skills.
-"Student Performance Tracker !",
-A system to enter student details, their marks, and get automatic analysis like average, pass/fail, and top scorers.
+📬 Skillmate Message Board
+A simple and interactive message board app built during the Skillmate Platform Contributor Challenge. This app allows users to post messages, react with emojis, switch between dark and light modes, and receive toast notifications.
 
-Features:
+🧰 Tech Stack
+HTML / CSS / JavaScript
 
-Add/edit/delete student records
+Optional enhancements using React (if applicable)
 
-Display performance charts
+Node.js or Flask backend (optional)
 
-Search/filter students by name or grade
+Git & GitHub for version control
 
-Export report as PDF
+🎯 Features
+📝 Post messages with name and text
 
-Tech Stack: HTML + CSS + JavaScript + Python (with matplotlib)
+🌙 Dark/Light mode toggle with sliding sun/moon animation
+
+😂 Emoji Reactions to each message (👍 ❤️ 😂)
+
+🔔 Toast Notifications for form validation and responses
+
+🧱 Reusable components using JavaScript functions
+
+📱 Fully responsive and clean UI
