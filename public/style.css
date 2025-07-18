@@ -14,6 +14,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  margin: 0;
   transition: background 0.4s ease, color 0.4s ease;
 }
 
@@ -50,10 +51,15 @@ body.dark-mode .container {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  padding: 0 1rem;
+  width: 100%;
 }
 
 h1 {
   color: var(--text-color);
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
 }
 
 .toggle-btn {
@@ -104,6 +110,15 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: var(--button-hover);
+}
+
+button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 #loading {
@@ -195,12 +210,13 @@ body.dark-mode .message-row {
 
 .reactions button span {
   margin-left: 4px;
-  color: var(--text-color); /* ✅ Ensures emoji count is visible in dark mode */
+  color: var(--text-color);
 }
 
 .reactions button:hover {
   transform: scale(1.1);
 }
+
 .theme-switch {
   width: 60px;
   height: 32px;
@@ -209,7 +225,7 @@ body.dark-mode .message-row {
   background: #ccc;
   position: relative;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.5s ease;
   padding: 0;
 }
 
@@ -225,7 +241,7 @@ body.dark-mode .message-row {
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 
 body.dark-mode .theme-switch {
@@ -238,4 +254,234 @@ body.dark-mode .theme-switch .slider {
 
 body.dark-mode .theme-switch .slider .icon {
   content: "🌙";
+}
+
+/* Quote Box (Using Your Provided CSS) */
+.quote-box {
+  position: left;
+  margin-top: 1rem;
+  width: 400px;
+  padding: 25px;
+  background-color: var(--bg-secondary, #ffffff);
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  font-family: 'Times New Roman', serif;
+  font-style: bold;
+  color: var(--text-primary, #000);
+  z-index: 1;
+}
+
+.quote-box h3 {
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.quote-box p {
+  margin-bottom: 14px;
+  font-size: 1.1rem;
+}
+
+.quote-box button {
+  padding: 8px 14px;
+  font-size: 0.95rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.quote-box button:hover {
+  background-color: #2563eb;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 1rem auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* === Sliding Side Panel === */
+.side-panel {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 280px;
+  height: 100vh;
+  background-color: var(--card-bg);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  padding: 2rem 1.5rem;
+  transition: left 0.4s ease;
+  overflow-y: auto;
+}
+
+.side-panel.open {
+  left: 0;
+}
+
+.side-panel h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  color: var(--text-color);
+}
+
+.side-panel ul {
+  list-style: none;
+  padding: 0;
+}
+
+.side-panel ul li {
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.side-panel ul li:hover {
+  color: var(--button-bg);
+}
+
+/* === Overlay Background when panel is open === */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* New Fade-in Animation for Messages */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.toggle-btn {
+  font-size: 1rem;
+  padding: 0.6rem 1.4rem;
+}
+.main-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3rem;
+  padding: 3rem 2rem;
+}
+
+.left-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.menu-btn {
+  font-size: 1.1rem;
+  padding: 0.7rem 1.6rem;
+}
+/* Chart Section Styling */
+.chart-section {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: background 0.4s ease;
+  border: 1px solid #ddd;
+  min-width: 300px;
+}
+
+body.dark-mode .chart-section {
+  border: 1px solid #444;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+}
+
+/* Refined spacing for dark mode toggle */
+.top-bar .theme-switch {
+  margin-left: 1rem;
+}
+
+/* Refined spacing between sections */
+.main-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2.5rem;
+  padding: 3rem 2rem;
+}
+
+.left-section,
+.container,
+.chart-section {
+  margin-top: 0;
+}
+/* More spacing between sections on mobile */
+@media (max-width: 992px) {
+  .main-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem; /* more breathing room */
+    padding: 2rem 1rem;
+  }
+
+  .left-section,
+  .container,
+  .chart-section {
+    width: 90%;
+    max-width: 500px;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Spacing for Dark Mode toggle */
+  .dark-mode-toggle {
+    margin-top: 1.2rem;
+  }
+
+  /* Optional: Center heading and switch */
+  .container h1 {
+    text-align: center;
+    margin-bottom: 0.8rem;
+  }
+
+  .theme-switch {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Optional: Chart padding */
+  .chart-section {
+    padding: 1.5rem;
+  }
 }

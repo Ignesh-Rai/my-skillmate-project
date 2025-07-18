@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const Message = require('./models/message');
@@ -8,6 +9,7 @@ const Note = require('./models/note');
 const app = express();
 const PORT = 5000;
 
+// ✅ Serve static files
 app.use(express.static('public'));
 
 // Middleware
@@ -19,7 +21,7 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
-// POST route: Save a message
+// Routes
 app.post('/api/message', async (req, res) => {
   const { name, text } = req.body;
   try {
@@ -31,7 +33,6 @@ app.post('/api/message', async (req, res) => {
   }
 });
 
-// GET route: Retrieve all messages
 app.get('/api/messages', async (req, res) => {
   try {
     const messages = await Message.find().sort({ createdAt: -1 });
@@ -61,11 +62,12 @@ app.get('/api/notes', async (req, res) => {
   }
 });
 
+// ✅ Serve index.html for root path
 app.get('/', (req, res) => {
-  res.send('Skillmate API is running 🚀');
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`✅ Server running at http://localhost:${PORT}`);
 });

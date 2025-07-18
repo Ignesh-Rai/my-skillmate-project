@@ -6,31 +6,87 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <div class="top-bar">
-      <h1>📨 Skillmate Messages</h1>
-      <button class="toggle-btn" onclick="toggleDarkMode()">🌙 Toggle</button>
-    </div>
+  <!-- 🔘 Overlay -->
+  <div class="overlay" id="overlay" onclick="closePanel()"></div>
 
-    <form id="messageForm">
-      <input type="text" id="name" placeholder="Your name" required />
-      <input type="text" id="text" placeholder="Your message" required />
-      <button type="submit">Send</button>
-    </form>
-
-    <p id="loading">Loading messages...</p>
-    <div id="messages"></div>
+  <!-- 📋 Side Panel -->
+  <div class="side-panel" id="sidePanel">
+    <h2>Skillmate Menu</h2>
+    <ul>
+      <li onclick="showSection('details')">📋 Message Details</li>
+      <li onclick="showSection('settings')">⚙️ Settings</li>
+      <li onclick="showSection('help')">❓ Help</li>
+      <li onclick="showSection('about')">ℹ️ About</li>
+    </ul>
   </div>
 
-  <!-- Feature Scripts -->
+  <!-- ✅ Main Layout -->
+  <div class="main-wrapper with-chart">
+    <!-- 🔹 Left: Menu + Quote -->
+    <div class="left-section">
+      <button class="toggle-btn menu-btn" onclick="openPanel()">☰ Menu</button>
+
+      <div class="quote-box">
+        <h3>🌟 Quote of the Moment</h3>
+        <div class="spinner" id="quoteSpinner" style="display:none;"></div>
+        <p id="quoteText">Click below to load a quote.</p>
+        <button onclick="getQuote()">🔁 Get New Quote</button>
+      </div>
+    </div>
+
+    <!-- 🔸 Center: Messaging Panel -->
+    <div class="container">
+      <div class="top-bar">
+        <h1>📨 Skillmate Messages</h1>
+        <button class="theme-switch" onclick="toggleDarkMode()">
+          <span class="slider"><span class="icon">🌞</span></span>
+        </button>
+      </div>
+
+      <form id="messageForm">
+        <input type="text" id="name" placeholder="Your name" required />
+        <input type="text" id="text" placeholder="Your message" required />
+        <button type="submit">Send</button>
+      </form>
+
+      <p id="loading">Loading messages...</p>
+      <div id="messages"></div>
+    </div>
+
+    <!-- 📊 Right: Chart Section -->
+    <div class="chart-section">
+      <h2>📈 Message Analytics</h2>
+      <canvas id="messageChart" width="300" height="200"></canvas>
+    </div>
+  </div>
+
+  <!-- Scripts -->
   <script src="darkmode.js"></script>
   <script src="emoji.js"></script>
   <script src="toast.js"></script>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
     const form = document.getElementById('messageForm');
     const loading = document.getElementById('loading');
     const messagesDiv = document.getElementById('messages');
+
+    function renderEmojiButtons() {
+      return `
+        <button onclick="addReaction(this)">👍 <span>0</span></button>
+        <button onclick="addReaction(this)">❤️ <span>0</span></button>
+        <button onclick="addReaction(this)">😂 <span>0</span></button>
+      `;
+    }
+
+    function createMessageHTML(name, text) {
+      return `
+        <strong>${name}</strong>: ${text}
+        <div class="reactions">${renderEmojiButtons()}</div>
+      `;
+    }
 
     async function fetchMessages() {
       loading.style.display = 'block';
@@ -38,24 +94,15 @@
       try {
         const res = await fetch('/api/messages');
         const data = await res.json();
-
-        if (Array.isArray(data)) {
-          data.forEach(msg => {
-            const div = document.createElement('div');
-            div.className = 'message';
-            div.innerHTML = `
-            <strong>${msg.name}</strong>: ${msg.text}
-              <div class="reactions">
-                <button onclick="addReaction(this)">👍 <span>0</span></button>
-                <button onclick="addReaction(this)">❤️ <span>0</span></button>
-                <button onclick="addReaction(this)">😂 <span>0</span></button>
-              </div>
-            `;
-            messagesDiv.appendChild(div);
-          });
-        }
-      } catch (err) {
-        messagesDiv.innerHTML = '<p>Oops ! Something went wrong..</p>';
+        data.forEach(msg => {
+          const div = document.createElement('div');
+          div.className = 'message fade-in';
+          div.innerHTML = createMessageHTML(msg.name, msg.text);
+          messagesDiv.appendChild(div);
+          setTimeout(() => div.classList.remove('fade-in'), 500);
+        });
+      } catch {
+        messagesDiv.innerHTML = '<p>Failed to load messages.</p>';
       } finally {
         loading.style.display = 'none';
       }
@@ -65,19 +112,16 @@
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
       const text = document.getElementById('text').value.trim();
-
       if (!name || !text) {
         showToast("Please fill out both fields.", "error");
         return;
       }
-
       try {
         const res = await fetch('/api/message', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, text })
         });
-
         if (res.ok) {
           showToast("Message sent!", "success");
           form.reset();
@@ -85,12 +129,73 @@
         } else {
           showToast("Error sending message.", "error");
         }
-      } catch (err) {
+      } catch {
         showToast("Network error.", "error");
       }
     });
 
+    async function getQuote() {
+      const quoteEl = document.getElementById('quoteText');
+      const spinner = document.getElementById('quoteSpinner');
+      quoteEl.style.display = 'none';
+      spinner.style.display = 'block';
+      try {
+        const res = await fetch('/api/quote');
+        const data = await res.json();
+        quoteEl.textContent = `"${data.content}" — ${data.author}`;
+      } catch {
+        const fallbackQuotes = [
+          { content: "The best way to predict the future is to create it.", author: "Peter Drucker" },
+          { content: "Success is not final, failure is not fatal.", author: "Winston Churchill" },
+          { content: "Learn from yesterday, live for today, hope for tomorrow.", author: "Albert Einstein" }
+        ];
+        const random = fallbackQuotes[Math.floor(Math.random() * fallbackQuotes.length)];
+        quoteEl.textContent = `"${random.content}" — ${random.author}`;
+      } finally {
+        quoteEl.style.display = 'block';
+        spinner.style.display = 'none';
+      }
+    }
+
+    function openPanel() {
+      document.getElementById('sidePanel').classList.add('open');
+      document.getElementById('overlay').classList.add('visible');
+    }
+
+    function closePanel() {
+      document.getElementById('sidePanel').classList.remove('open');
+      document.getElementById('overlay').classList.remove('visible');
+    }
+
+    function showSection(section) {
+      alert(`"${section}" section clicked.`);
+      closePanel();
+    }
+
+    // 📊 Load chart with mock data
+    const ctx = document.getElementById('messageChart').getContext('2d');
+    const messageChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        datasets: [{
+          label: 'Messages Sent',
+          data: [5, 9, 3, 7, 6],
+          backgroundColor: 'rgba(54, 162, 235, 0.7)'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
     fetchMessages();
+    getQuote();
   </script>
 </body>
 </html>
