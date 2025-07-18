@@ -93,4 +93,4 @@ Ignesh Rai
 
 Made with ❤️ at Skillmate
 
-Built during the ##Skillmate Platform Contributor## challenge using MongoDB, Node.js, and creativity! 🎯
+Built during the **Skillmate Platform Contributor** challenge using MongoDB, Node.js, and creativity! 🎯
