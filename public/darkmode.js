@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // Toggle dark mode with localStorage support
+=======
+/* Toggle dark mode */
+>>>>>>> 28a1131
 function toggleDarkMode() {
   document.body.classList.toggle("dark-mode");
 
