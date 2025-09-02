@@ -74,7 +74,9 @@ npm run dev
 
 ## About 
 
-This Skillmate Messenger is Developed during the Internship done at ***SkillMate ❤***
+This Skillmate Messenger is Developed during the Internship done at ***SkillMate***
+
+Learned Something new !! Thank you Team ❤
 
 ---
 ## 🛣️ Roadmap (Future Improvements)
@@ -84,6 +86,7 @@ This Skillmate Messenger is Developed during the Internship done at ***SkillMate
 💬 Comments & Threads – Allow replies to messages for better discussions.
 
 📊 Advanced Analytics – Track active users & reaction trends with charts.
+
 
 
 
