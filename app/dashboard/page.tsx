@@ -23,7 +23,7 @@ export default function DashboardPage() {
   if (!session) {
     return (
       <div className="flex flex-col justify-center items-center h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
-        <h1 className="text-4xl font mb-6">Welcome to </h1>
+        <h1 className="text-4xl font mb-6">Get Back to </h1>
         <h2 className="text-5xl font-bold mb-6">Skillmate Messages </h2>
         <button
           onClick={() => signIn('google',{ prompt:'select_account'})}
