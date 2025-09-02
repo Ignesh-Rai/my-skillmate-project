@@ -70,9 +70,6 @@ npm run dev
 ### 📨 Dashboard 
 ![Dashboard with Dark and Light Mode Toggle](public/screenshots/Final.png)
 
-### 📊 Chart + Quote Section
-![Chart + Quotes](public/screenshots/chart.png)
-
 ---
 
 ## About 
@@ -87,6 +84,7 @@ This Skillmate Messenger is Developed during the Internship done at ***SkillMate
 💬 Comments & Threads – Allow replies to messages for better discussions.
 
 📊 Advanced Analytics – Track active users & reaction trends with charts.
+
 
 
 
