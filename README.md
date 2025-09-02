@@ -1,6 +1,6 @@
 # 📨 Skillmate Message Board
 
-Skillmate Messenger is a full-stack project built with **Next.js, TailwindCSS, MongoDB, and NextAuth**.  
+***Skillmate Messenger*** is a full-stack project built with **Next.js, TailwindCSS, MongoDB, and NextAuth**.  
 It allows users to sign in with Google, post messages, react with emojis, view message stats, and get motivational quotes.
 
 ---
@@ -84,6 +84,7 @@ This Skillmate Messenger is Developed during the Internship done at ***SkillMate
 💬 Comments & Threads – Allow replies to messages for better discussions.
 
 📊 Advanced Analytics – Track active users & reaction trends with charts.
+
 
 
 
